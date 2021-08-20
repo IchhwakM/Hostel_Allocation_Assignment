@@ -1,25 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import { googleProvider } from './config/authMethods';
+import { facebookProvider} from './config/authMethods';
+import socialMediaAuth from './service/auth'
 
 function App() {
+
+  const handleOnClick = async(provider) => {
+    const res = await socialMediaAuth(provider);
+    console.log(res);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <button>Github</button>
-        <button>Google</button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Hostel Allocation</h1>
+      <p>Please Sign-in:</p>
+      <button onClick={() => handleOnClick(googleProvider)}>Sign in with Google</button>
+      <br />
+      <button onClick={() => handleOnClick(facebookProvider)}>Sign in with Facebook</button>
     </div>
   );
 }
